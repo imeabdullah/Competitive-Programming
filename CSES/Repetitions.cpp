@@ -14,7 +14,7 @@ void solve()
         cout<<1<<endl;
         return;
     }
-    for(int i=1;i<inp.size();i++)
+    for(int i=1;i<inp.size();i++)   
     {
         if(inp[i-1]==inp[i])
         {
