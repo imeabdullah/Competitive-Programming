@@ -8,6 +8,6 @@ using namespace std;
 int main()
 {
     BOOST;
-    //freopen("input.txt","r",stdin);
-    //freopen("output","w",stdout);
+    freopen("input.txt","r",stdin);
+    freopen("output.txt","w",stdout);
 }
