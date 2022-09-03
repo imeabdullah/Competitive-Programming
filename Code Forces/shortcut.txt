@@ -1,0 +1,6 @@
+// some technique that are useful 
+string:
+    reverse(str.begin(),str.end());
+bitset:
+    b.to_ulong() // convert it into usigned long
+    b.to_string() // convert it into string

@@ -17,14 +17,17 @@ int n;
 
 void solve() 
 {
-    int a, b;
-    int x = min(a,b);
-    ll ans = 1;
-    fo(1,(x+1))
+    int k;
+    cin>>n >> k;
+    if(k <= n*3)
     {
-        ans *= i;
+        cout<<n*3-k;
     }
-    cout << ans << endl;
+    else
+    {
+        cout<<"0";
+    }
+    return;
 }
 
 int main() 
@@ -34,6 +37,5 @@ int main()
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-
     solve();
 }
