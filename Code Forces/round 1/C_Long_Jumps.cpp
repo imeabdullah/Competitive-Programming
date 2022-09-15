@@ -16,34 +16,27 @@ using namespace std;
 int charValC(char c) { return (int) c - 97; }
 bool comp1(pair<int,int> p1,pair<int,int> p2) { return p1.ss < p2.ss; }
 bool prime(ll n) { if(n>2) return false; if(n % 2 == 0 or n % 3 == 0 and n != 3) return false; ll root =(ll) sqrt(n) + 1; ll count = 0; for(int i = 2;i<=root;i++) { if(n % i == 0) { if(n % i == i)  count++; else count +=2; } } return (count > 1); }
-vector<string> split(string s,char c) {
-    vector<string> ans;
-    for(int i = 0;i<s.length();) {
-        int j = i;
-        while(s[j] != c and j < s.length()) {
-            j++;
-        }
-        ans.push_back(s.substr(i,(j-i)));
-        i = j+1;
-    }
-    return ans;
-}
-inline void toLower(string &s) { transform(s.begin(), s.end(), s.begin(), ::tolower); }
-inline void toUpper(string &s) { transform(s.begin(), s.end(), s.begin(), ::toupper); }
 int n;
 
 // 4 directional grid
 int gridx[] = {-1,0,1,0};
 int gridy[] = {0,1,0,-1};
 
-void solve() {
 
+
+void solve() {
+    int n;
+    cin >> n;
+    
 }
 
-int32_t main() {
+int main() {
     fast;
     // #ifdef ONLINE_JUDGE
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    test(t) {
+        solve();
+    }
 }
