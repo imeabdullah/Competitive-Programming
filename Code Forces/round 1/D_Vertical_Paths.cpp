@@ -11,8 +11,8 @@ using namespace std;
 #define rfo(n,j)    for(int i = n-1;i>=j;i--)
 #define yes         cout << "YES" << endl
 #define no          cout << "NO" << endl
+#define debug       cout <<"OK\n"
 #define mod         1e9+7
-//---------------------------macros-----------------------------
 
 int charValC(char c) { return (int) c - 97; }
 bool comp1(pair<int,int> p1,pair<int,int> p2) { return p1.ss < p2.ss; }
@@ -31,56 +31,77 @@ vector<string> split(string s,char c) {
 }
 inline string toLower(string &s) { transform(s.begin(), s.end(), s.begin(), ::tolower); return s; }
 inline string toUpper(string &s) { transform(s.begin(), s.end(), s.begin(), ::toupper); return s; }
-//---------------------------Useful Functions-----------------------------
-ll n, m, k;
+ll n, k;
 string s;
-//---------------------------global variables-----------------------------
+
 // 4 directional grid
 int gridx[] = {-1,0,1,0};
 int gridy[] = {0,1,0,-1};
 
-
 void solve() {
+    cin >> n;
+    vector<int> tree(n+1);
+    vector<bool> leaf(n+1, true);
+
+    fo(1,(n+1)) {
+        cin >> tree[i];
+        leaf[tree[i]] = false; 
+    }
+    if(n == 1) {
+        cout << 1 << endl;
+        cout << 1 << endl;
+        cout << 1 << endl;
+        cout << endl;
+        return;
+    }
+
+    // from this
+    bool vis[n+1] = {0};
+    vector<stack<int>> ans;
     
+    //to this => code is okay
+
+    for(int i = 1;i<=n;i++) {
+        if(leaf[i] and !vis[i]) {
+            stack<int> st;  
+            st.push(i);
+            vis[i] = 1;
+            int pr = tree[i];
+            while(!vis[pr]) {
+                vis[pr] = 1;
+                st.push(pr);
+                pr = tree[pr];
+                
+                if((tree[pr] == pr and vis[pr] == 0)) {
+                    vis[pr] = 1;
+                    st.push(pr);
+                    break;
+                }
+            }
+            ans.push_back(st);  
+        }
+    }
+
+    cout << ans.size() << endl;
+    for(int i=(ans.size() - 1);i>=0;i--) {
+        cout << ans[i].size() << endl;
+        while (!ans[i].empty()) {
+            cout << ans[i].top() <<" ";
+            ans[i].pop();
+        }
+        ans.pop_back();
+        cout << endl;
+    }
+    cout << endl;
 }
 
-int32_t main() {
+int main() {
     fast;
     // #ifdef ONLINE_JUDGE
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    test(t) {
+        solve();
+    }
 }
-
-/* Final check before submit :
- 
-1. array size or integer overflow,like uninitialised 0 index.
- 
-2. Think twice,code once.check all possible counter test case.
- 
-3. Be careful about corner case! n=1?k=1? something about 0?
- 
-4. avoid stupid mistake!complexity(t/m)?precision error?submit same code twice?
- 
-5. if got WA than remember that you are missing something common.
-   *** Be confident!!! who knows? may be your one step back to AC ***
-4. minus mod ans=(ans-k+mod)%mod;
- 
-*/
- 
- 
-/* IF WA???
- 
-1. corner case! n=1?k=1? something about 0?
- 
-2. check code(avoid stupid mistake)
- 
-3. read the statement again(if there any missing point???)
- 
-4. check the idea(check all possible counter test case again!!!)
- 
-5. be calm,don't be panic!!!.(***this problem not going to decide your future***)
- 
-6. don't waste too much time. move to next problem
- 
-*/

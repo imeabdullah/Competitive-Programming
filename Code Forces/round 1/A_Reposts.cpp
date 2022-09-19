@@ -48,10 +48,9 @@ void solve() {
         transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
 
         post[s1] = post[s3] + 1;
-        //cout << post[s1] << endl;
-        repo = max(repo,post[s1]);
+        repo = max(repo,post[s3]);
     }
-    cout << repo  << endl;
+    cout << repo + 1 << endl;
 }
 
 int32_t main() {

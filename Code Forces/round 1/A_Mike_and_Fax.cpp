@@ -41,7 +41,29 @@ int gridy[] = {0,1,0,-1};
 
 
 void solve() {
-    
+    string s;
+    cin >> s;
+    cin >> n;
+
+    int perSize = s.length() / n;
+    if(s.length() % n > 0) {
+        no;
+        return;
+    }
+    for(int i = 0;i<s.length();) {
+        int k = i;
+        int j = i + (perSize - 1);
+        while(k <= j) {
+            if(s[k] != s[j]) {
+                no;
+                return;
+            }
+            k++;
+            j--;
+        }
+        i += perSize;
+    }
+    yes;
 }
 
 int32_t main() {
@@ -50,6 +72,7 @@ int32_t main() {
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    solve();
 }
 
 /* Final check before submit :

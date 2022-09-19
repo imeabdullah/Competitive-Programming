@@ -41,7 +41,32 @@ int gridy[] = {0,1,0,-1};
 
 
 void solve() {
-    
+    cin >> n;
+    unordered_map<string,string> mp;
+    set<string> notBegin;
+    fo(0,n) {
+        string Old, New;
+        cin >> Old >> New;
+        mp[Old] = New;
+        notBegin.insert(New);
+    }
+    int count = 0;
+    vector<pair<string,string>> ans;
+    for(auto it:mp) {
+        if(notBegin.find(it.ff) == notBegin.end()) {
+            string s = it.ss;
+            while(mp.find(s) != mp.end()) {
+                s = mp[s];
+            }
+            ans.push_back({it.ff,s});
+        }
+    }
+
+    cout << ans.size() << endl;
+    for(auto it:ans) {
+        cout << it.ff <<" " << it.ss << endl;
+    }
+    cout << endl;
 }
 
 int32_t main() {
@@ -50,6 +75,7 @@ int32_t main() {
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    solve();
 }
 
 /* Final check before submit :

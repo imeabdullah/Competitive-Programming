@@ -12,7 +12,6 @@ using namespace std;
 #define yes         cout << "YES" << endl
 #define no          cout << "NO" << endl
 #define mod         1e9+7
-//---------------------------macros-----------------------------
 
 int charValC(char c) { return (int) c - 97; }
 bool comp1(pair<int,int> p1,pair<int,int> p2) { return p1.ss < p2.ss; }
@@ -29,19 +28,37 @@ vector<string> split(string s,char c) {
     }
     return ans;
 }
-inline string toLower(string &s) { transform(s.begin(), s.end(), s.begin(), ::tolower); return s; }
-inline string toUpper(string &s) { transform(s.begin(), s.end(), s.begin(), ::toupper); return s; }
-//---------------------------Useful Functions-----------------------------
+inline void toLower(string &s) { transform(s.begin(), s.end(), s.begin(), ::tolower); }
+inline void toUpper(string &s) { transform(s.begin(), s.end(), s.begin(), ::toupper); }
+// ------------- helper function --------------------------------------------------------
 ll n, m, k;
 string s;
-//---------------------------global variables-----------------------------
+
 // 4 directional grid
 int gridx[] = {-1,0,1,0};
 int gridy[] = {0,1,0,-1};
 
-
 void solve() {
-    
+    cin >> n >> m;
+    vector<ll> room(n);
+    vector<ll> mail(m);
+    fo(0,n) {
+        cin >> room[i];
+        if(i)
+            room[i] += room[i-1];
+    }
+    fo(0,m) cin >> mail[i];
+
+    fo(0,m) {
+        int ind = lower_bound(all(room),mail[i]) - room.begin();
+        if(ind == 0) {
+            cout << 1 << " " << mail[i] << endl;
+            continue;
+        } else {
+            cout << ind + 1 << " " << (mail[i]) - room[ind-1] << endl;
+            continue;
+        }
+    }
 }
 
 int32_t main() {
@@ -50,37 +67,5 @@ int32_t main() {
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    solve();
 }
-
-/* Final check before submit :
- 
-1. array size or integer overflow,like uninitialised 0 index.
- 
-2. Think twice,code once.check all possible counter test case.
- 
-3. Be careful about corner case! n=1?k=1? something about 0?
- 
-4. avoid stupid mistake!complexity(t/m)?precision error?submit same code twice?
- 
-5. if got WA than remember that you are missing something common.
-   *** Be confident!!! who knows? may be your one step back to AC ***
-4. minus mod ans=(ans-k+mod)%mod;
- 
-*/
- 
- 
-/* IF WA???
- 
-1. corner case! n=1?k=1? something about 0?
- 
-2. check code(avoid stupid mistake)
- 
-3. read the statement again(if there any missing point???)
- 
-4. check the idea(check all possible counter test case again!!!)
- 
-5. be calm,don't be panic!!!.(***this problem not going to decide your future***)
- 
-6. don't waste too much time. move to next problem
- 
-*/
