@@ -13,6 +13,11 @@
         "initializer_list": "cpp",
         "regex": "cpp",
         "valarray": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "fstream": "cpp",
+        "functional": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "tuple": "cpp"
     }
 }

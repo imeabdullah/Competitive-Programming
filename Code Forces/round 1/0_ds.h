@@ -1,6 +1,29 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+vector<int> parent;
+vector<int> size;
+
+int get(int a) {
+    if(parent[a] == a) {
+        return a;
+    }
+    return parent[a] = get(parent[a]);
+}
+
+void Union(int a, int b) {
+    a = get(a);
+    b = get(b);
+
+    if(a == b) return;
+
+    if(size[a] < size[b]) swap(a,b);
+
+    parent[b] = parent[a];
+    size[a] += size[b];
+}
+
 class DS {
     private:
     vector<int> parent, rank, size;
@@ -24,7 +47,7 @@ class DS {
         if(parent[node] == node) {
             return node;
         }
-        return parent[node] = findPar(node);
+        return parent[node] = findPar(parent[node]);
     }
 
     void unionByRank(int node1,int node2) {
@@ -45,18 +68,30 @@ class DS {
         }
     }
 
+    // void unionBySize(int u, int v) {
+    //     u = findPar(u);
+    //     v = findPar(v);
+
+    //     if(u == v) return;
+
+    //     if(size[u] > size[v]) {
+    //         parent[v] = parent[u];
+    //         size[u] += size[v];
+    //     } else {
+    //         parent[u] = parent[v];
+    //         size[v] += size[u];
+    //     }
+    // }
+
     void unionBySize(int u, int v) {
         u = findPar(u);
         v = findPar(v);
 
         if(u == v) return;
 
-        if(size[u] > size[v]) {
-            parent[v] = parent[u];
-            size[u] += size[v];
-        } else {
-            parent[u] = parent[v];
-            size[v] += size[u];
-        }
+        if(size[u] < size[v]) swap(u,v);
+        
+        parent[v] = parent[u];
+        size[u] += size[v];
     }
 };

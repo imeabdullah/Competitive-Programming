@@ -38,10 +38,74 @@ string s;
 // 4 directional grid
 int gridx[] = {-1,0,1,0};
 int gridy[] = {0,1,0,-1};
+class DS {
+    public:
+    vector<int> parent, size, maxi, mini;
 
+    public:
+    DS(int n) {
+        // assigning to 0th index
+        parent.push_back(-1);
+        size.push_back(-1);
+        mini.push_back(-1);
+        maxi.push_back(-1);
+        //rank.push_back(-1);
+
+        // from 1 to nth index
+        for(int i = 1;i<=n;i++) {
+            parent.push_back(i);
+            size.push_back(1);
+            mini.push_back(i);
+            maxi.push_back(i);
+            //rank.push_back(0);
+        }
+    }
+
+    int findPar(int node) {
+        if(parent[node] == node) {
+            return node;
+        }
+        return parent[node] = findPar(parent[node]);
+    }
+
+    void unionBySize(int u, int v) {
+        u = findPar(u);
+        v = findPar(v);
+
+        if(u == v) return;
+
+        if(size[v] > size[u]) swap(u, v);
+
+        parent[v] = u;
+        size[u] += size[v];
+
+        // mini element
+        mini[u] = min(mini[u],mini[v]);
+        // max element
+        maxi[u] = max(maxi[u],maxi[v]);
+    }
+};
 
 void solve() {
-    
+    cin >> n >> m;
+    DS ds(n);
+    fo(0,m) {
+        string s;
+        int u, v;
+        cin >> s;
+
+        if(s[0] == 'u') {
+            cin >> u >> v;
+            ds.unionBySize(u,v);
+        } else {
+            cin >> u;
+            int x = ds.findPar(u);
+            cout << ds.mini[x] <<" " << ds.maxi[x] << " " << ds.size[x] << endl;
+        }
+    }
+    // for(auto it:ds.currSize) {
+    //     cout << it << " ";
+    // }
 }
 
 int32_t main() {
@@ -50,4 +114,5 @@ int32_t main() {
     //     freopen("input.txt","r",stdin);
     //     freopen("output.txt","w",stdout);
     // #endif
+    solve();
 }
